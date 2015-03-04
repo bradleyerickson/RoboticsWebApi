@@ -31,6 +31,9 @@ def direction(direction):
 
 @main.route('/run')
 def running():
-        runProgram()  #This works but the controls only work from the terminal
+        if runProgram():
+		return 'Program is running'
+	else:
+		return 'Fail'
 	
 run(main, host='localhost', port=8080)
