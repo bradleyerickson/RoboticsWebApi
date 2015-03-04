@@ -1,5 +1,7 @@
 # Main bottle route generator 
-
+import sys
+sys.path.insert(0, '/usr/local/Aria/pythonExamples')
+from teleop import runProgram
 from bottle import *
 from subprocess import check_output
 
@@ -26,5 +28,9 @@ def direction(direction):
 		return 'Success'
 	else:
 		return 'Fail'
+
+@main.route('/run')
+def running():
+        runProgram()  #This works but the controls only work from the terminal
 	
 run(main, host='localhost', port=8080)
