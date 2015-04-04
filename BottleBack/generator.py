@@ -10,15 +10,6 @@ from subprocess import check_output
 #    'right' : ['echo', 'bye world']
 #}
 
-@route('/static/:path#.+#', name='static')
-def static(path):
-	return static_file(path, root="static")
-
-@route('/')
-@route('/index.html')
-def index():
-	raise static_file('index.html', root='./')
-	
 #@route('/forward')
 #@view('main_temp')
 #def direction(forward = 'forward'):
@@ -29,8 +20,20 @@ def index():
 #	else:
 #		return 'Fail'
 
-@route('/run')
+#@route('/static/:path#.+#', name='static')
+#def static(path):
+#	return static_file(path, root="static")
+
+@route('/')
+def index():
+	return 'HOME'	
+
+
+@route('/forward')
+@route('/left')
+@route('/right')
+@route('/backward')
 def running():
-	return 'TEMP'
+	return 'SUCCESS'
 	
 run(host='localhost', port=8080)
