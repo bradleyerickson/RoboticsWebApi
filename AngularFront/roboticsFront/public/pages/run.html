@@ -1,5 +1,71 @@
+<script src="/socket.io/socket.io.js"></script>
+
 <div class="jumbotron text-center">
 	<h1>Running Page</h1>
 	
 	<p>{{message}}</p>
+	
+	<button class="btn btn-default" id="fwdBtn">Forward</button>
+	<button class="btn btn-default" id="leftBtn">Left</button>
+	<button class="btn btn-default" id="rightBtn">Right</button>
+	<button class="btn btn-default" id="bckBtn">Back</button>
+	<p id='text'></p>
 </div>
+
+<script>
+	var socket = io();
+	$('#fwdBtn').on('click', function() {
+		socket.emit('forward', 'moveForward');
+	});
+	$('#rightBtn').on('click', function() {
+		socket.emit('right', 'moveRight');
+	});
+	$('#leftBtn').on('click', function() {
+		socket.emit('left', 'moveLeft');
+	});
+	$('#bckBtn').on('click', function() {
+		socket.emit('backward', 'moveBackward');
+	});
+	
+	socket.on('forward', function(msg) { 
+		if(msg == 'SUCCESS')
+			document.getElementById("fwdBtn").style.backgroundColor = "#2D882D";
+		else
+			document.getElementById("fwdBtn").style.backgroundColor = "#E60000";
+			
+		setTimeout(function(){
+			document.getElementById("fwdBtn").style.backgroundColor = 'white';
+		}, 1000);
+	});
+	socket.on('right', function(msg) { 
+		if(msg == 'SUCCESS')
+			document.getElementById("rightBtn").style.backgroundColor = "#2D882D";
+		else
+			document.getElementById("rightBtn").style.backgroundColor = "#E60000";
+			
+		setTimeout(function(){
+			document.getElementById("rightBtn").style.backgroundColor = 'white';
+		}, 1000);
+	});
+	socket.on('left', function(msg) { 
+		if(msg == 'SUCCESS')
+			document.getElementById("leftBtn").style.backgroundColor = "#2D882D";
+		else
+			document.getElementById("leftBtn").style.backgroundColor = "#E60000";
+			
+		setTimeout(function(){
+			document.getElementById("leftBtn").style.backgroundColor = 'white';
+		}, 1000);
+	});
+	socket.on('backward', function(msg) { 
+		if(msg == 'SUCCESS')
+			document.getElementById("bckBtn").style.backgroundColor = "#2D882D";
+		else
+			document.getElementById("bckBtn").style.backgroundColor = "#E60000";
+			
+		setTimeout(function(){
+			document.getElementById("bckBtn").style.backgroundColor = 'white';
+		}, 1000);
+	});
+
+</script>
