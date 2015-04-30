@@ -4,24 +4,27 @@
 from AriaPy import *
 import sys
 
+
 class moveRobot():
-    Aria_init()
 
-    parser = ArArgumentParser(sys.argv)
-    parser.loadDefaultArguments()
+    def __init__(self):
+        Aria_init()
 
-    #Create Robot Object
-    robot = ArRobot()
+        parser = ArArgumentParser(sys.argv)
+        parser.loadDefaultArguments()
 
-    #Create a "simple connector"
-    con = ArRobotConnector(parser, robot)
-    if not Aria_parseArgs():
-        Aria_logOptions()
-        Aria_exit(1)
+        #Create Robot Object
+        robot = ArRobot()
 
-    if not con.connectRobot():
-        print "Could not connect to robot, exiting"
-        Aria_exit(1)
+        #Create a "simple connector"
+        con = ArRobotConnector(parser, robot)
+        if not Aria_parseArgs():
+            Aria_logOptions()
+            Aria_exit(1)
+
+        if not con.connectRobot():
+            print "Could not connect to robot, exiting"
+            Aria_exit(1)
 
     def moveForward(self):
         self.robot.runAsync(1)
@@ -31,7 +34,6 @@ class moveRobot():
         self.robot.unlock()
         ArUtil_sleep(5000)
         Aria_shutdown()
-    
 
     def turnAround(self):
         self.robot.runAsync(1)
@@ -41,7 +43,6 @@ class moveRobot():
         self.robot.unlock()
         ArUtil_sleep(5000)
         Aria_shutdown()
-        
 
     def turnRight(self):
         self.robot.runAsync(1)
@@ -51,7 +52,7 @@ class moveRobot():
         self.robot.unlock()
         ArUtil_sleep(5000)
         Aria_shutdown()
-        
+
     def turnLeft(self):
         self.robot.runAsync(1)
         self.robot.lock()
@@ -70,6 +71,7 @@ class moveRobot():
         ArUtil_sleep(5000)
         Aria_shutdown()
 
+
 def main():
     newRobot = moveRobot()
     newRobot.moveForward()
@@ -77,8 +79,6 @@ def main():
     newRobot.turnRight()
     newRobot.turnLeft()
     newRobot.moveForward()
-
-
 
 
 if __name__ == '__main__':
