@@ -6,25 +6,25 @@ import sys
 
 
 class moveRobot():
+    # NOTE must call once
+    # TODO pass in robot object to __init__()
+    Aria_init()
 
-    def __init__(self):
-        Aria_init()
+    parser = ArArgumentParser(sys.argv)
+    parser.loadDefaultArguments()
 
-        parser = ArArgumentParser(sys.argv)
-        parser.loadDefaultArguments()
+    #Create Robot Object
+    robot = ArRobot()
 
-        #Create Robot Object
-        robot = ArRobot()
+    #Create a "simple connector"
+    con = ArRobotConnector(parser, robot)
+    if not Aria_parseArgs():
+        Aria_logOptions()
+        Aria_exit(1)
 
-        #Create a "simple connector"
-        con = ArRobotConnector(parser, robot)
-        if not Aria_parseArgs():
-            Aria_logOptions()
-            Aria_exit(1)
-
-        if not con.connectRobot():
-            print "Could not connect to robot, exiting"
-            Aria_exit(1)
+    if not con.connectRobot():
+        print "Could not connect to robot, exiting"
+        Aria_exit(1)
 
     def moveForward(self):
         self.robot.runAsync(1)
